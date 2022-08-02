@@ -1,5 +1,6 @@
 require 'faker'
 
+User.create(first_name: "anonymous",last_name: "anonymous")
 until User.count == 50
   User.create(
     first_name: Faker::Name.first_name,

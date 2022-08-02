@@ -1,2 +1,33 @@
-<h1>Gossip#new</h1>
-<p>Find me in app/views/gossip/new.html.erb</p>
+    <%# <%= form_with url: gossip_index_path do |form| %> <%# La méthode form_with appelle implicitement la méthode post %> %>
+      <%# <%= form.text_field :gossip_title %> %>
+      <%# <%= form.text_area :gossip_content, size: "70x5" %> %>
+      <%# <%= form.submit "Publish" %> %>
+    <%# <% end %> %>
+
+
+
+   <div class="container text-center"> %>
+    <h3>You want to create a new gossip? You're at the right place.</h3>
+    <br>
+    <form action= <%= gossip_index_path %> method="POST">
+      <p>What title do you want to give your gossip?</p>
+      <input type="text" name="gossip_title"><br>
+      <br>
+      <p>Give us the dirt</p>
+      <input type="text" name="gossip_content" size=50><br>
+      <br>
+      <input type="submit" value="Confirm">
+      <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+    </form>
+    <br>
+    <br>
+    <% if @gossip.errors.any? %>
+      <p>We were not able to create this new gossip for the following reason(s):</p>
+      <ul style="list-style-type:none">
+        <% @gossip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul><br>
+      <p>Please try again</p>
+    <% end %>
+  </div>

@@ -3,9 +3,19 @@ class GossipController < ApplicationController
     @gossips = Gossip.all
   end
 
-  def create; end
+  def create
+    @gossip = Gossip.new(user: User.first, title: params['gossip_title'], content: params['gossip_content'])
+    if @gossip.save
+      redirect_to home_path
+    else
+      render new_gossip_path
+    end
+  end
 
-  def new; end
+  def new
+    @gossips = Gossip.all
+    @gossip = Gossip.new
+  end
 
   def edit; end
 
