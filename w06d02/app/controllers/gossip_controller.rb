@@ -4,9 +4,12 @@ class GossipController < ApplicationController
   end
 
   def create
+    @gossips = Gossip.all
     @gossip = Gossip.new(user: User.first, title: params['gossip_title'], content: params['gossip_content'])
     if @gossip.save
       redirect_to home_path
+      @posted = true
+      render gossip: 'index'
     else
       render new_gossip_path
     end
